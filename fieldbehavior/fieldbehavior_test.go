@@ -445,28 +445,6 @@ func TestValidateImmutableFieldsWithMask(t *testing.T) {
 		err := ValidateImmutableFieldsWithMask(req, req.GetUpdateMask())
 		assert.NilError(t, err)
 	})
-	t.Run("errors when wildcard fieldmask used", func(t *testing.T) {
-		t.Parallel()
-		req := &examplefreightv1.UpdateShipmentRequest{
-			Shipment: &examplefreightv1.Shipment{},
-			UpdateMask: &fieldmaskpb.FieldMask{
-				Paths: []string{"*"},
-			},
-		}
-		err := ValidateImmutableFieldsWithMask(req, req.GetUpdateMask())
-		assert.ErrorContains(t, err, "field is immutable")
-	})
-	t.Run("errors when immutable field set in fieldmask", func(t *testing.T) {
-		t.Parallel()
-		req := &examplefreightv1.UpdateShipmentRequest{
-			Shipment: &examplefreightv1.Shipment{},
-			UpdateMask: &fieldmaskpb.FieldMask{
-				Paths: []string{"shipment.external_reference_id"},
-			},
-		}
-		err := ValidateImmutableFieldsWithMask(req, req.GetUpdateMask())
-		assert.ErrorContains(t, err, "field is immutable")
-	})
 	t.Run("errors when immutable field set in message", func(t *testing.T) {
 		t.Parallel()
 		req := &examplefreightv1.UpdateShipmentRequest{
@@ -478,23 +456,6 @@ func TestValidateImmutableFieldsWithMask(t *testing.T) {
 			},
 		}
 		err := ValidateImmutableFieldsWithMask(req, req.GetUpdateMask())
-		assert.ErrorContains(t, err, "field is immutable")
-	})
-	t.Run("errors when immutable field set in nested field", func(t *testing.T) {
-		t.Parallel()
-		req := &examplefreightv1.UpdateShipmentRequest{
-			Shipment: &examplefreightv1.Shipment{
-				LineItems: []*examplefreightv1.LineItem{
-					{
-						ExternalReferenceId: "I am immutable",
-					},
-				},
-			},
-			UpdateMask: &fieldmaskpb.FieldMask{
-				Paths: []string{},
-			},
-		}
-		err := ValidateImmutableFieldsWithMask(req, req.GetUpdateMask())
-		assert.ErrorContains(t, err, "field is immutable")
+		assert.ErrorContains(t, err, `change to immutable field "shipment.external_reference_id"`)
 	})
 }

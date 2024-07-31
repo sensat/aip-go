@@ -3,6 +3,7 @@ package fieldbehavior
 import (
 	"fmt"
 
+	"go.einride.tech/aip/fieldmask"
 	"google.golang.org/genproto/googleapis/api/annotations"
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/reflect/protoreflect"
@@ -38,7 +39,7 @@ func validateRequiredFields(reflectMessage protoreflect.Message, mask *fieldmask
 		}
 		currPath += string(field.Name())
 		if !isMessageFieldPresent(reflectMessage, field) {
-			if Has(field, annotations.FieldBehavior_REQUIRED) && hasPath(mask, currPath) {
+			if Has(field, annotations.FieldBehavior_REQUIRED) && hasMask(mask, currPath) {
 				return fmt.Errorf("missing required field: %s", currPath)
 			}
 		} else if field.Kind() == protoreflect.MessageKind {
@@ -80,14 +81,32 @@ func isEmpty(mask *fieldmaskpb.FieldMask) bool {
 	return mask == nil || len(mask.GetPaths()) == 0
 }
 
-func hasPath(mask *fieldmaskpb.FieldMask, needle string) bool {
+func hasMask(mask *fieldmaskpb.FieldMask, needle string) bool {
 	if isEmpty(mask) {
 		return true
 	}
+
+	fields := fieldmask.SplitPath(needle)
 	for _, straw := range mask.GetPaths() {
-		if straw == "*" || straw == needle {
+		if matchPath(fields, straw) {
 			return true
 		}
 	}
+
 	return false
+}
+
+func matchPath(fields []string, maskPath string) bool {
+	maskFields := fieldmask.SplitPath(maskPath)
+	if len(fields) < len(maskFields) {
+		return false
+	}
+
+	for i, maskField := range maskFields {
+		if maskField != "*" && fields[i] != maskField {
+			return false
+		}
+	}
+
+	return true
 }

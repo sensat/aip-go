@@ -65,6 +65,18 @@ message Shipment {
 
   // Reference ID provided by external system.
   string external_reference_id = 13 [(google.api.field_behavior) = IMMUTABLE];
+
+  // labels of the shipment.
+  map<string, string> immutable_primitives_map = 14 [(google.api.field_behavior) = IMMUTABLE];
+
+  // map line items of the shipment.
+  map<string, LineItem> line_items_map = 17;
+
+  // map line items of the shipment.
+  map<string, LineItem> immutable_line_items_map = 15 [(google.api.field_behavior) = IMMUTABLE];
+
+  // The immutable line items of the shipment.
+  repeated LineItem immutable_line_item_list = 16 [(google.api.field_behavior) = IMMUTABLE];
 }
 
 // A shipment line item.
