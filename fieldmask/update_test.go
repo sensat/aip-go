@@ -582,8 +582,8 @@ func TestUpdate(t *testing.T) {
 				},
 			},
 			{
-				// can not update individual entries in a map
-				name: "maps: deep",
+				// can update individual entries in a map
+				name: "maps: whole entry",
 				paths: []string{
 					"map_string_string.src1",
 				},
@@ -600,7 +600,32 @@ func TestUpdate(t *testing.T) {
 				},
 				expected: &syntaxv1.Message{
 					MapStringString: map[string]string{
+						"src1":    "src1-value",
 						"dst-key": "dst-value",
+					},
+				},
+			},
+			{
+				// can update individual entries in a map
+				name: "maps: deep field",
+				paths: []string{
+					"map_string_message.`src1.escaped`.string",
+				},
+				src: &syntaxv1.Message{
+					MapStringMessage: map[string]*syntaxv1.Message{
+						"src1.escaped": {String_: "src1-value"},
+					},
+				},
+				dst: &syntaxv1.Message{
+					MapStringMessage: map[string]*syntaxv1.Message{
+						"src1.escaped": {String_: "dst1-value"},
+						"dst-key":      {String_: "dst2-value"},
+					},
+				},
+				expected: &syntaxv1.Message{
+					MapStringMessage: map[string]*syntaxv1.Message{
+						"src1.escaped": {String_: "src1-value"},
+						"dst-key":      {String_: "dst2-value"},
 					},
 				},
 			},
@@ -644,6 +669,7 @@ func TestUpdate(t *testing.T) {
 					},
 				},
 			},
+
 			{
 				name: "oneof",
 				paths: []string{
@@ -794,4 +820,22 @@ func TestUpdate(t *testing.T) {
 			})
 		}
 	})
+}
+
+func TestXsxx(t *testing.T) {
+	t.Parallel()
+	for _, tt := range []struct {
+		name     string
+		paths    []string
+		src      proto.Message
+		dst      proto.Message
+		expected proto.Message
+	}{} {
+		tt := tt
+		t.Run(tt.name, func(t *testing.T) {
+			Update(&fieldmaskpb.FieldMask{Paths: tt.paths}, tt.dst, tt.src)
+			assert.DeepEqual(t, tt.expected, tt.dst, protocmp.Transform())
+		})
+	}
+
 }

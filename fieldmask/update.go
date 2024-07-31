@@ -2,7 +2,6 @@ package fieldmask
 
 import (
 	"fmt"
-	"strings"
 
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/reflect/protoreflect"
@@ -17,6 +16,8 @@ import (
 //
 // If no update mask is provided, only non-zero values of src are copied to dst.
 // If the special value "*" is provided as the field mask, a full replacement of all fields in dst is done.
+//
+// # Update masks should be validated beforehand.
 //
 // See: https://google.aip.dev/134 (Standard methods: Update).
 func Update(mask *fieldmaskpb.FieldMask, dst, src proto.Message) {
@@ -41,7 +42,7 @@ func Update(mask *fieldmaskpb.FieldMask, dst, src proto.Message) {
 		proto.Merge(dst, src)
 	default:
 		for _, path := range mask.GetPaths() {
-			segments := strings.Split(path, ".")
+			segments := SplitPath(path)
 			updateNamedField(dstReflect, srcReflect, segments)
 		}
 	}
@@ -86,9 +87,30 @@ func updateNamedField(dst, src protoreflect.Message, segments []string) {
 
 	// a named field in a nested message
 	switch {
-	case field.IsList(), field.IsMap():
-		// nested fields in repeated or map not supported
+	case field.IsList():
+		// nested fields in repeated not supported
 		return
+	case field.IsMap():
+		key := protoreflect.ValueOf(segments[1]).MapKey()
+		srcMap := src.Get(field).Map()
+		dstMap := dst.Get(field).Map()
+
+		// if map entry is not set, allocate an empty value
+		if !dstMap.Has(key) {
+			dstMap.Set(key, dstMap.NewValue())
+		}
+		if !srcMap.Has(key) {
+			dstMap.Set(key, srcMap.NewValue())
+		}
+
+		// if len is 2, we want to copy src's whole entry to dst
+		if len(segments) == 2 {
+			dstMap.Set(key, srcMap.Get(key))
+			return
+		}
+
+		// continue iterating into the map entry
+		updateNamedField(dstMap.Get(key).Message(), srcMap.Get(key).Message(), segments[2:])
 	case field.Message() != nil:
 		// if message field is not set, allocate an empty value
 		if !dst.Has(field) {
