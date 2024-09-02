@@ -9,8 +9,9 @@ import (
 )
 
 var (
-	ErrMismatchedListLength = errors.New("mismatched list length")
-	ErrMissingMapKey        = errors.New("missing map key")
+	ErrMismatchedListLength           = errors.New("mismatched list length")
+	ErrMissingMapKey                  = errors.New("missing map key")
+	ErrAttemptingToCopyOutputOnlyList = errors.New("can't copy lists output_only fields")
 )
 
 // recursively clear output_only fields
@@ -50,7 +51,7 @@ func ClearOutputOnlyFields(msg proto.Message) {
 // recursively copy output_only fields.
 // lists are skipped entirely
 // output fields in map values are copied if the key exists in both source and destination
-func CopyOutputOnlyFields(destination proto.Message, source proto.Message) {
+func CopyOutputOnlyFields(destination proto.Message, source proto.Message) error {
 	CopyFields(destination, source, annotations.FieldBehavior_OUTPUT_ONLY)
 
 	src := source.ProtoReflect()
@@ -59,7 +60,8 @@ func CopyOutputOnlyFields(destination proto.Message, source proto.Message) {
 		srcField := src.Descriptor().Fields().Get(i)
 		dstField := dst.Descriptor().Fields().Get(i)
 
-		// non-messages can't be recursed on, so continue to next field. fieldbehavior.CopyFields has already handled them.
+		// non-messages can't be recursed on, so continue to next field.
+		// fieldbehavior.CopyFields has already handled primitives for us.
 		// if src is empty we don't need to copy anything
 		// if dst is not set we can't recursively set its fields.
 		if srcField.Kind() != protoreflect.MessageKind || !src.Has(srcField) || !dst.Has(dstField) {
@@ -69,17 +71,20 @@ func CopyOutputOnlyFields(destination proto.Message, source proto.Message) {
 		srcValue := src.Get(srcField)
 		dstValue := dst.Get(dstField)
 		switch {
-		case srcField.IsList():
-			// we can't handle lists because there's no way of ensuring we're dealing with the same elements
+		case srcField.IsList() && srcField.Kind() == protoreflect.MessageKind:
+			srcList := srcValue.List()
+			// we can't handle output_only fields in lists because there's no way of ensuring we're dealing with the same elements
 			// as we iterate over both lists.
-			//
-			// we're panicking here to ensure we don't silently skip lists.
 			//
 			// the current thinking for implementing this functionality for lists is to require all lists
 			// of messages with output_only fields or subfields to be either IMMUTABLE or OUTPUT_ONLY themselves.
 			// This would guarantee a consistent mapping between fields in both arrays.
-			panic("can't copy lists output_only fields") //nolint:forbidigo // we want to warn early that we're not handling lists
-
+			if srcList.Len() > 0 {
+				value := srcList.Get(0).Message().Interface()
+				if MessageHas(value, annotations.FieldBehavior_OUTPUT_ONLY) {
+					return ErrAttemptingToCopyOutputOnlyList
+				}
+			}
 		case srcField.IsMap():
 			srcMap := srcValue.Map()
 			dstMap := dstValue.Map()
@@ -89,16 +94,23 @@ func CopyOutputOnlyFields(destination proto.Message, source proto.Message) {
 				continue
 			}
 
+			var err error
 			srcMap.Range(func(key protoreflect.MapKey, _ protoreflect.Value) bool {
 				// only copy values if destination also has that entry.
 				if dstMap.Has(key) {
-					CopyOutputOnlyFields(dstMap.Get(key).Message().Interface(), srcMap.Get(key).Message().Interface())
+					if err = CopyOutputOnlyFields(dstMap.Get(key).Message().Interface(), srcMap.Get(key).Message().Interface()); err != nil {
+						return false
+					}
 				}
 
 				return true
 			})
+
+			return err
 		default:
-			CopyOutputOnlyFields(dstValue.Message().Interface(), srcValue.Message().Interface())
+			return CopyOutputOnlyFields(dstValue.Message().Interface(), srcValue.Message().Interface())
 		}
 	}
+
+	return nil
 }

@@ -18,6 +18,26 @@ func Get(field protoreflect.FieldDescriptor) []annotations.FieldBehavior {
 	return nil
 }
 
+func MessageHas(m proto.Message, want annotations.FieldBehavior) bool {
+	var has bool
+	rangeFieldsWithBehaviors(
+		m.ProtoReflect(),
+		func(
+			_ protoreflect.Message,
+			_ protoreflect.FieldDescriptor,
+			_ protoreflect.Value,
+			behaviors []annotations.FieldBehavior,
+		) bool {
+			if hasBehavior(behaviors, want) {
+				has = true
+				return false
+			}
+			return true
+		},
+	)
+	return has
+}
+
 // Has returns true if the provided field descriptor has the wanted field behavior.
 func Has(field protoreflect.FieldDescriptor, want annotations.FieldBehavior) bool {
 	for _, got := range Get(field) {
