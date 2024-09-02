@@ -105,10 +105,13 @@ func CopyOutputOnlyFields(destination proto.Message, source proto.Message) error
 
 				return true
 			})
-
-			return err
+			if err != nil {
+				return err
+			}
 		default:
-			return CopyOutputOnlyFields(dstValue.Message().Interface(), srcValue.Message().Interface())
+			if err := CopyOutputOnlyFields(dstValue.Message().Interface(), srcValue.Message().Interface()); err != nil {
+				return err
+			}
 		}
 	}
 

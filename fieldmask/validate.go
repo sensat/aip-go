@@ -28,7 +28,7 @@ func Validate(fm *fieldmaskpb.FieldMask, m0 proto.Message) error {
 			field := fields[i]
 			// Search the field within the message.
 			if md == nil {
-				return fmt.Errorf("invalid field path: %s", path) // not within a message
+				return fmt.Errorf("field '%s' not in message. invalid field path: %s", field, path) // not within a message
 			}
 			name := protoreflect.Name(field)
 			fd := md.Fields().ByName(name)
@@ -55,14 +55,14 @@ func Validate(fm *fieldmaskpb.FieldMask, m0 proto.Message) error {
 
 					// key doesn't exist in map
 					if !val.IsValid() {
-						return fmt.Errorf("invalid field path: %s", path)
+						return fmt.Errorf("key doesn't exist in map. invalid field path: %s", path)
 					}
 
 					// if this isn't a message (e.g. a primitive) and we're not at the end of the path, then this path is invalid
 					// as we can't address fields in primitive types
 					if fd.MapValue().Kind() != protoreflect.MessageKind {
 						if i+1 != len(fields) {
-							return fmt.Errorf("invalid field path: %s", path)
+							return fmt.Errorf("map value was a primitive, which don't have fields. invalid field path: %s", path)
 						}
 
 						return nil
@@ -71,14 +71,21 @@ func Validate(fm *fieldmaskpb.FieldMask, m0 proto.Message) error {
 					m = val.Message().Interface().ProtoReflect()
 					md = m.Descriptor()
 				}
+			case fd.IsList():
+				// lists aren't addressable by item according to the FieldMask spec
+				// https://aip.dev/161#wildcards
+				// if we're not at the end of the list of fields, then this path is invalid.
+				if i+1 != len(fields) {
+					return fmt.Errorf("lists aren't addressable by item. invalid field path: %s. ", path)
+				}
 			case fd.Kind() == protoreflect.MessageKind:
 				m = m.Get(fd).Message().Interface().ProtoReflect()
 				md = m.Descriptor()
 			default:
-				// lists aren't addressable by item and primitives can't have submessages
+				// primitives can't have submessages
 				// if we're not at the end of the list of fields, then this path is invalid.
 				if i+1 != len(fields) {
-					return fmt.Errorf("invalid field path: %s", path)
+					return fmt.Errorf("primitives don't have fields. invalid field path: %s.", path)
 				}
 			}
 		}

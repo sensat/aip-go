@@ -65,6 +65,23 @@ func TestValidate(t *testing.T) {
 		},
 
 		{
+			name: "valid list",
+			fieldMask: &fieldmaskpb.FieldMask{
+				Paths: []string{"string_list"},
+			},
+			message: &syntaxv1.FieldBehaviorMessage{StringList: []string{"value"}},
+		},
+
+		{
+			name: "invalid list item",
+			fieldMask: &fieldmaskpb.FieldMask{
+				Paths: []string{"string_list.0"},
+			},
+			message:       &syntaxv1.FieldBehaviorMessage{StringList: []string{"value"}},
+			errorContains: "lists aren't addressable by item. invalid field path: string_list.0",
+		},
+
+		{
 			name: "invalid nested",
 			fieldMask: &fieldmaskpb.FieldMask{
 				Paths: []string{"parent", "book.foo"},
