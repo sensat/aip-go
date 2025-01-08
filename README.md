@@ -5,17 +5,30 @@
 Go SDK for implementing [Google API Improvement Proposals](https://aip.dev/)
 (AIP).
 
-## Documentation
-
-See [https://aip.dev](https://aip.dev/) for the full AIP documentation.
-
-## Installing
+## Generate AIP support code from proto
 
 ```bash
-$ go get -u go.einride.tech/aip
+go install go.einride.tech/aip/cmd/protoc-gen-go-aip
 ```
 
-## Examples
+Add to `buf.gen.yaml`:
+
+```yaml
+version: v2
+plugins:
+  - local: protoc-gen-go-aip
+    out: gen
+    opt:
+      - paths=source_relative
+```
+
+Run `buf build` to generate e.g. `your_service_aip.go`.
+
+## Library usage examples
+
+```bash
+go get -u go.einride.tech/aip
+```
 
 ### [AIP-132](https://google.aip.dev/132) (Standard method: List)
 
