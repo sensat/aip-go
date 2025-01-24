@@ -1,10 +1,12 @@
-syntax = "proto3";
+edition = "2023";
 
 package einride.example.freight.v1;
 
 import "google/api/field_behavior.proto";
 import "google/api/resource.proto";
 import "google/protobuf/timestamp.proto";
+
+option features.field_presence = IMPLICIT;
 
 // A shipment represents transportation of goods between an origin
 // [site][einride.example.freight.v1.Site] and a destination

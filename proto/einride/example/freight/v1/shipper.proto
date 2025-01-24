@@ -1,10 +1,12 @@
-syntax = "proto3";
+edition = "2023";
 
 package einride.example.freight.v1;
 
 import "google/api/field_behavior.proto";
 import "google/api/resource.proto";
 import "google/protobuf/timestamp.proto";
+
+option features.field_presence = IMPLICIT;
 
 // A shipper is a supplier or owner of goods to be transported.
 message Shipper {

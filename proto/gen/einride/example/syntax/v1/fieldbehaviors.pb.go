@@ -26,20 +26,20 @@ type FieldBehaviorMessage struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Field                       string                           `protobuf:"bytes,1,opt,name=field,proto3" json:"field,omitempty"`
-	OutputOnlyField             string                           `protobuf:"bytes,2,opt,name=output_only_field,json=outputOnlyField,proto3" json:"output_only_field,omitempty"`
-	OptionalField               string                           `protobuf:"bytes,3,opt,name=optional_field,json=optionalField,proto3" json:"optional_field,omitempty"`
-	MessageWithoutFieldBehavior *FieldBehaviorMessage            `protobuf:"bytes,12,opt,name=message_without_field_behavior,json=messageWithoutFieldBehavior,proto3" json:"message_without_field_behavior,omitempty"`
-	OutputOnlyMessage           *FieldBehaviorMessage            `protobuf:"bytes,13,opt,name=output_only_message,json=outputOnlyMessage,proto3" json:"output_only_message,omitempty"`
-	OptionalMessage             *FieldBehaviorMessage            `protobuf:"bytes,14,opt,name=optional_message,json=optionalMessage,proto3" json:"optional_message,omitempty"`
-	RepeatedMessage             []*FieldBehaviorMessage          `protobuf:"bytes,4,rep,name=repeated_message,json=repeatedMessage,proto3" json:"repeated_message,omitempty"`
-	RepeatedOutputOnlyMessage   []*FieldBehaviorMessage          `protobuf:"bytes,5,rep,name=repeated_output_only_message,json=repeatedOutputOnlyMessage,proto3" json:"repeated_output_only_message,omitempty"`
-	RepeatedOptionalMessage     []*FieldBehaviorMessage          `protobuf:"bytes,6,rep,name=repeated_optional_message,json=repeatedOptionalMessage,proto3" json:"repeated_optional_message,omitempty"`
-	MapMessage                  map[string]*FieldBehaviorMessage `protobuf:"bytes,7,rep,name=map_message,json=mapMessage,proto3" json:"map_message,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	MapOutputOnlyMessage        map[string]*FieldBehaviorMessage `protobuf:"bytes,8,rep,name=map_output_only_message,json=mapOutputOnlyMessage,proto3" json:"map_output_only_message,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	MapOptionalMessage          map[string]*FieldBehaviorMessage `protobuf:"bytes,9,rep,name=map_optional_message,json=mapOptionalMessage,proto3" json:"map_optional_message,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	StringMap                   map[string]string                `protobuf:"bytes,10,rep,name=string_map,json=stringMap,proto3" json:"string_map,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	StringList                  []string                         `protobuf:"bytes,11,rep,name=string_list,json=stringList,proto3" json:"string_list,omitempty"`
+	Field                       string                           `protobuf:"bytes,1,opt,name=field" json:"field,omitempty"`
+	OutputOnlyField             string                           `protobuf:"bytes,2,opt,name=output_only_field,json=outputOnlyField" json:"output_only_field,omitempty"`
+	OptionalField               string                           `protobuf:"bytes,3,opt,name=optional_field,json=optionalField" json:"optional_field,omitempty"`
+	MessageWithoutFieldBehavior *FieldBehaviorMessage            `protobuf:"bytes,12,opt,name=message_without_field_behavior,json=messageWithoutFieldBehavior" json:"message_without_field_behavior,omitempty"`
+	OutputOnlyMessage           *FieldBehaviorMessage            `protobuf:"bytes,13,opt,name=output_only_message,json=outputOnlyMessage" json:"output_only_message,omitempty"`
+	OptionalMessage             *FieldBehaviorMessage            `protobuf:"bytes,14,opt,name=optional_message,json=optionalMessage" json:"optional_message,omitempty"`
+	RepeatedMessage             []*FieldBehaviorMessage          `protobuf:"bytes,4,rep,name=repeated_message,json=repeatedMessage" json:"repeated_message,omitempty"`
+	RepeatedOutputOnlyMessage   []*FieldBehaviorMessage          `protobuf:"bytes,5,rep,name=repeated_output_only_message,json=repeatedOutputOnlyMessage" json:"repeated_output_only_message,omitempty"`
+	RepeatedOptionalMessage     []*FieldBehaviorMessage          `protobuf:"bytes,6,rep,name=repeated_optional_message,json=repeatedOptionalMessage" json:"repeated_optional_message,omitempty"`
+	MapMessage                  map[string]*FieldBehaviorMessage `protobuf:"bytes,7,rep,name=map_message,json=mapMessage" json:"map_message,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	MapOutputOnlyMessage        map[string]*FieldBehaviorMessage `protobuf:"bytes,8,rep,name=map_output_only_message,json=mapOutputOnlyMessage" json:"map_output_only_message,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	MapOptionalMessage          map[string]*FieldBehaviorMessage `protobuf:"bytes,9,rep,name=map_optional_message,json=mapOptionalMessage" json:"map_optional_message,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	StringMap                   map[string]string                `protobuf:"bytes,10,rep,name=string_map,json=stringMap" json:"string_map,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	StringList                  []string                         `protobuf:"bytes,11,rep,name=string_list,json=stringList" json:"string_list,omitempty"`
 	// Types that are assignable to Oneof:
 	//
 	//	*FieldBehaviorMessage_FieldBehaviorMessage
@@ -203,11 +203,11 @@ type isFieldBehaviorMessage_Oneof interface {
 }
 
 type FieldBehaviorMessage_FieldBehaviorMessage struct {
-	FieldBehaviorMessage *FieldBehaviorMessage `protobuf:"bytes,15,opt,name=field_behavior_message,json=fieldBehaviorMessage,proto3,oneof"`
+	FieldBehaviorMessage *FieldBehaviorMessage `protobuf:"bytes,15,opt,name=field_behavior_message,json=fieldBehaviorMessage,oneof"`
 }
 
 type FieldBehaviorMessage_SmallFieldBehaviorMessage struct {
-	SmallFieldBehaviorMessage *SmallFieldBehaviorMessage `protobuf:"bytes,16,opt,name=small_field_behavior_message,json=smallFieldBehaviorMessage,proto3,oneof"`
+	SmallFieldBehaviorMessage *SmallFieldBehaviorMessage `protobuf:"bytes,16,opt,name=small_field_behavior_message,json=smallFieldBehaviorMessage,oneof"`
 }
 
 func (*FieldBehaviorMessage_FieldBehaviorMessage) isFieldBehaviorMessage_Oneof() {}
@@ -219,9 +219,9 @@ type SmallFieldBehaviorMessage struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Field           string `protobuf:"bytes,1,opt,name=field,proto3" json:"field,omitempty"`
-	OutputOnlyField string `protobuf:"bytes,2,opt,name=output_only_field,json=outputOnlyField,proto3" json:"output_only_field,omitempty"`
-	OptionalField   string `protobuf:"bytes,3,opt,name=optional_field,json=optionalField,proto3" json:"optional_field,omitempty"`
+	Field           string `protobuf:"bytes,1,opt,name=field" json:"field,omitempty"`
+	OutputOnlyField string `protobuf:"bytes,2,opt,name=output_only_field,json=outputOnlyField" json:"output_only_field,omitempty"`
+	OptionalField   string `protobuf:"bytes,3,opt,name=optional_field,json=optionalField" json:"optional_field,omitempty"`
 }
 
 func (x *SmallFieldBehaviorMessage) Reset() {
@@ -416,7 +416,7 @@ var file_einride_example_syntax_v1_fieldbehaviors_proto_rawDesc = []byte{
 	0x74, 0x70, 0x75, 0x74, 0x4f, 0x6e, 0x6c, 0x79, 0x46, 0x69, 0x65, 0x6c, 0x64, 0x12, 0x2b, 0x0a,
 	0x0e, 0x6f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x61, 0x6c, 0x5f, 0x66, 0x69, 0x65, 0x6c, 0x64, 0x18,
 	0x03, 0x20, 0x01, 0x28, 0x09, 0x42, 0x04, 0xe2, 0x41, 0x01, 0x01, 0x52, 0x0d, 0x6f, 0x70, 0x74,
-	0x69, 0x6f, 0x6e, 0x61, 0x6c, 0x46, 0x69, 0x65, 0x6c, 0x64, 0x42, 0xfd, 0x01, 0x0a, 0x1d, 0x63,
+	0x69, 0x6f, 0x6e, 0x61, 0x6c, 0x46, 0x69, 0x65, 0x6c, 0x64, 0x42, 0x82, 0x02, 0x0a, 0x1d, 0x63,
 	0x6f, 0x6d, 0x2e, 0x65, 0x69, 0x6e, 0x72, 0x69, 0x64, 0x65, 0x2e, 0x65, 0x78, 0x61, 0x6d, 0x70,
 	0x6c, 0x65, 0x2e, 0x73, 0x79, 0x6e, 0x74, 0x61, 0x78, 0x2e, 0x76, 0x31, 0x42, 0x13, 0x46, 0x69,
 	0x65, 0x6c, 0x64, 0x62, 0x65, 0x68, 0x61, 0x76, 0x69, 0x6f, 0x72, 0x73, 0x50, 0x72, 0x6f, 0x74,
@@ -432,8 +432,8 @@ var file_einride_example_syntax_v1_fieldbehaviors_proto_rawDesc = []byte{
 	0x61, 0x6d, 0x70, 0x6c, 0x65, 0x5c, 0x53, 0x79, 0x6e, 0x74, 0x61, 0x78, 0x5c, 0x56, 0x31, 0x5c,
 	0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x1c, 0x45, 0x69,
 	0x6e, 0x72, 0x69, 0x64, 0x65, 0x3a, 0x3a, 0x45, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x3a, 0x3a,
-	0x53, 0x79, 0x6e, 0x74, 0x61, 0x78, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x33,
+	0x53, 0x79, 0x6e, 0x74, 0x61, 0x78, 0x3a, 0x3a, 0x56, 0x31, 0x92, 0x03, 0x02, 0x08, 0x02, 0x62,
+	0x08, 0x65, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x70, 0xe8, 0x07,
 }
 
 var (

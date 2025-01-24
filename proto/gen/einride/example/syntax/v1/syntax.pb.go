@@ -74,42 +74,42 @@ type Message struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Double           float64             `protobuf:"fixed64,1,opt,name=double,proto3" json:"double,omitempty"`
-	Float            float32             `protobuf:"fixed32,2,opt,name=float,proto3" json:"float,omitempty"`
-	Int32            int32               `protobuf:"varint,3,opt,name=int32,proto3" json:"int32,omitempty"`
-	Int64            int64               `protobuf:"varint,4,opt,name=int64,proto3" json:"int64,omitempty"`
-	Uint32           uint32              `protobuf:"varint,5,opt,name=uint32,proto3" json:"uint32,omitempty"`
-	Uint64           uint64              `protobuf:"varint,6,opt,name=uint64,proto3" json:"uint64,omitempty"`
-	Sint32           int32               `protobuf:"zigzag32,7,opt,name=sint32,proto3" json:"sint32,omitempty"`
-	Sint64           int64               `protobuf:"zigzag64,8,opt,name=sint64,proto3" json:"sint64,omitempty"`
-	Fixed32          uint32              `protobuf:"fixed32,9,opt,name=fixed32,proto3" json:"fixed32,omitempty"`
-	Fixed64          uint64              `protobuf:"fixed64,10,opt,name=fixed64,proto3" json:"fixed64,omitempty"`
-	Sfixed32         int32               `protobuf:"fixed32,11,opt,name=sfixed32,proto3" json:"sfixed32,omitempty"`
-	Sfixed64         int64               `protobuf:"fixed64,12,opt,name=sfixed64,proto3" json:"sfixed64,omitempty"`
-	Bool             bool                `protobuf:"varint,13,opt,name=bool,proto3" json:"bool,omitempty"`
-	String_          string              `protobuf:"bytes,14,opt,name=string,proto3" json:"string,omitempty"`
-	Bytes            []byte              `protobuf:"bytes,15,opt,name=bytes,proto3" json:"bytes,omitempty"`
-	Enum             Enum                `protobuf:"varint,16,opt,name=enum,proto3,enum=einride.example.syntax.v1.Enum" json:"enum,omitempty"`
-	Message          *Message            `protobuf:"bytes,17,opt,name=message,proto3" json:"message,omitempty"`
-	RepeatedDouble   []float64           `protobuf:"fixed64,18,rep,packed,name=repeated_double,json=repeatedDouble,proto3" json:"repeated_double,omitempty"`
-	RepeatedFloat    []float32           `protobuf:"fixed32,19,rep,packed,name=repeated_float,json=repeatedFloat,proto3" json:"repeated_float,omitempty"`
-	RepeatedInt32    []int32             `protobuf:"varint,20,rep,packed,name=repeated_int32,json=repeatedInt32,proto3" json:"repeated_int32,omitempty"`
-	RepeatedInt64    []int64             `protobuf:"varint,21,rep,packed,name=repeated_int64,json=repeatedInt64,proto3" json:"repeated_int64,omitempty"`
-	RepeatedUint32   []uint32            `protobuf:"varint,22,rep,packed,name=repeated_uint32,json=repeatedUint32,proto3" json:"repeated_uint32,omitempty"`
-	RepeatedUint64   []uint64            `protobuf:"varint,23,rep,packed,name=repeated_uint64,json=repeatedUint64,proto3" json:"repeated_uint64,omitempty"`
-	RepeatedSint32   []int32             `protobuf:"zigzag32,24,rep,packed,name=repeated_sint32,json=repeatedSint32,proto3" json:"repeated_sint32,omitempty"`
-	RepeatedSint64   []int64             `protobuf:"zigzag64,25,rep,packed,name=repeated_sint64,json=repeatedSint64,proto3" json:"repeated_sint64,omitempty"`
-	RepeatedFixed32  []uint32            `protobuf:"fixed32,26,rep,packed,name=repeated_fixed32,json=repeatedFixed32,proto3" json:"repeated_fixed32,omitempty"`
-	RepeatedFixed64  []uint64            `protobuf:"fixed64,27,rep,packed,name=repeated_fixed64,json=repeatedFixed64,proto3" json:"repeated_fixed64,omitempty"`
-	RepeatedSfixed32 []int32             `protobuf:"fixed32,28,rep,packed,name=repeated_sfixed32,json=repeatedSfixed32,proto3" json:"repeated_sfixed32,omitempty"`
-	RepeatedSfixed64 []int64             `protobuf:"fixed64,29,rep,packed,name=repeated_sfixed64,json=repeatedSfixed64,proto3" json:"repeated_sfixed64,omitempty"`
-	RepeatedBool     []bool              `protobuf:"varint,30,rep,packed,name=repeated_bool,json=repeatedBool,proto3" json:"repeated_bool,omitempty"`
-	RepeatedString   []string            `protobuf:"bytes,31,rep,name=repeated_string,json=repeatedString,proto3" json:"repeated_string,omitempty"`
-	RepeatedBytes    [][]byte            `protobuf:"bytes,32,rep,name=repeated_bytes,json=repeatedBytes,proto3" json:"repeated_bytes,omitempty"`
-	RepeatedEnum     []Enum              `protobuf:"varint,33,rep,packed,name=repeated_enum,json=repeatedEnum,proto3,enum=einride.example.syntax.v1.Enum" json:"repeated_enum,omitempty"`
-	RepeatedMessage  []*Message          `protobuf:"bytes,34,rep,name=repeated_message,json=repeatedMessage,proto3" json:"repeated_message,omitempty"`
-	MapStringString  map[string]string   `protobuf:"bytes,35,rep,name=map_string_string,json=mapStringString,proto3" json:"map_string_string,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	MapStringMessage map[string]*Message `protobuf:"bytes,36,rep,name=map_string_message,json=mapStringMessage,proto3" json:"map_string_message,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	Double           float64             `protobuf:"fixed64,1,opt,name=double" json:"double,omitempty"`
+	Float            float32             `protobuf:"fixed32,2,opt,name=float" json:"float,omitempty"`
+	Int32            int32               `protobuf:"varint,3,opt,name=int32" json:"int32,omitempty"`
+	Int64            int64               `protobuf:"varint,4,opt,name=int64" json:"int64,omitempty"`
+	Uint32           uint32              `protobuf:"varint,5,opt,name=uint32" json:"uint32,omitempty"`
+	Uint64           uint64              `protobuf:"varint,6,opt,name=uint64" json:"uint64,omitempty"`
+	Sint32           int32               `protobuf:"zigzag32,7,opt,name=sint32" json:"sint32,omitempty"`
+	Sint64           int64               `protobuf:"zigzag64,8,opt,name=sint64" json:"sint64,omitempty"`
+	Fixed32          uint32              `protobuf:"fixed32,9,opt,name=fixed32" json:"fixed32,omitempty"`
+	Fixed64          uint64              `protobuf:"fixed64,10,opt,name=fixed64" json:"fixed64,omitempty"`
+	Sfixed32         int32               `protobuf:"fixed32,11,opt,name=sfixed32" json:"sfixed32,omitempty"`
+	Sfixed64         int64               `protobuf:"fixed64,12,opt,name=sfixed64" json:"sfixed64,omitempty"`
+	Bool             bool                `protobuf:"varint,13,opt,name=bool" json:"bool,omitempty"`
+	String_          string              `protobuf:"bytes,14,opt,name=string" json:"string,omitempty"`
+	Bytes            []byte              `protobuf:"bytes,15,opt,name=bytes" json:"bytes,omitempty"`
+	Enum             Enum                `protobuf:"varint,16,opt,name=enum,enum=einride.example.syntax.v1.Enum" json:"enum,omitempty"`
+	Message          *Message            `protobuf:"bytes,17,opt,name=message" json:"message,omitempty"`
+	RepeatedDouble   []float64           `protobuf:"fixed64,18,rep,packed,name=repeated_double,json=repeatedDouble" json:"repeated_double,omitempty"`
+	RepeatedFloat    []float32           `protobuf:"fixed32,19,rep,packed,name=repeated_float,json=repeatedFloat" json:"repeated_float,omitempty"`
+	RepeatedInt32    []int32             `protobuf:"varint,20,rep,packed,name=repeated_int32,json=repeatedInt32" json:"repeated_int32,omitempty"`
+	RepeatedInt64    []int64             `protobuf:"varint,21,rep,packed,name=repeated_int64,json=repeatedInt64" json:"repeated_int64,omitempty"`
+	RepeatedUint32   []uint32            `protobuf:"varint,22,rep,packed,name=repeated_uint32,json=repeatedUint32" json:"repeated_uint32,omitempty"`
+	RepeatedUint64   []uint64            `protobuf:"varint,23,rep,packed,name=repeated_uint64,json=repeatedUint64" json:"repeated_uint64,omitempty"`
+	RepeatedSint32   []int32             `protobuf:"zigzag32,24,rep,packed,name=repeated_sint32,json=repeatedSint32" json:"repeated_sint32,omitempty"`
+	RepeatedSint64   []int64             `protobuf:"zigzag64,25,rep,packed,name=repeated_sint64,json=repeatedSint64" json:"repeated_sint64,omitempty"`
+	RepeatedFixed32  []uint32            `protobuf:"fixed32,26,rep,packed,name=repeated_fixed32,json=repeatedFixed32" json:"repeated_fixed32,omitempty"`
+	RepeatedFixed64  []uint64            `protobuf:"fixed64,27,rep,packed,name=repeated_fixed64,json=repeatedFixed64" json:"repeated_fixed64,omitempty"`
+	RepeatedSfixed32 []int32             `protobuf:"fixed32,28,rep,packed,name=repeated_sfixed32,json=repeatedSfixed32" json:"repeated_sfixed32,omitempty"`
+	RepeatedSfixed64 []int64             `protobuf:"fixed64,29,rep,packed,name=repeated_sfixed64,json=repeatedSfixed64" json:"repeated_sfixed64,omitempty"`
+	RepeatedBool     []bool              `protobuf:"varint,30,rep,packed,name=repeated_bool,json=repeatedBool" json:"repeated_bool,omitempty"`
+	RepeatedString   []string            `protobuf:"bytes,31,rep,name=repeated_string,json=repeatedString" json:"repeated_string,omitempty"`
+	RepeatedBytes    [][]byte            `protobuf:"bytes,32,rep,name=repeated_bytes,json=repeatedBytes" json:"repeated_bytes,omitempty"`
+	RepeatedEnum     []Enum              `protobuf:"varint,33,rep,packed,name=repeated_enum,json=repeatedEnum,enum=einride.example.syntax.v1.Enum" json:"repeated_enum,omitempty"`
+	RepeatedMessage  []*Message          `protobuf:"bytes,34,rep,name=repeated_message,json=repeatedMessage" json:"repeated_message,omitempty"`
+	MapStringString  map[string]string   `protobuf:"bytes,35,rep,name=map_string_string,json=mapStringString" json:"map_string_string,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	MapStringMessage map[string]*Message `protobuf:"bytes,36,rep,name=map_string_message,json=mapStringMessage" json:"map_string_message,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Types that are assignable to Oneof:
 	//
 	//	*Message_OneofString
@@ -443,19 +443,19 @@ type isMessage_Oneof interface {
 }
 
 type Message_OneofString struct {
-	OneofString string `protobuf:"bytes,37,opt,name=oneof_string,json=oneofString,proto3,oneof"`
+	OneofString string `protobuf:"bytes,37,opt,name=oneof_string,json=oneofString,oneof"`
 }
 
 type Message_OneofEnum struct {
-	OneofEnum Enum `protobuf:"varint,38,opt,name=oneof_enum,json=oneofEnum,proto3,enum=einride.example.syntax.v1.Enum,oneof"`
+	OneofEnum Enum `protobuf:"varint,38,opt,name=oneof_enum,json=oneofEnum,enum=einride.example.syntax.v1.Enum,oneof"`
 }
 
 type Message_OneofMessage1 struct {
-	OneofMessage1 *Message `protobuf:"bytes,39,opt,name=oneof_message1,json=oneofMessage1,proto3,oneof"`
+	OneofMessage1 *Message `protobuf:"bytes,39,opt,name=oneof_message1,json=oneofMessage1,oneof"`
 }
 
 type Message_OneofMessage2 struct {
-	OneofMessage2 *Message `protobuf:"bytes,40,opt,name=oneof_message2,json=oneofMessage2,proto3,oneof"`
+	OneofMessage2 *Message `protobuf:"bytes,40,opt,name=oneof_message2,json=oneofMessage2,oneof"`
 }
 
 func (*Message_OneofString) isMessage_Oneof() {}
@@ -595,7 +595,7 @@ var file_einride_example_syntax_v1_syntax_proto_rawDesc = []byte{
 	0x75, 0x6d, 0x12, 0x14, 0x0a, 0x10, 0x45, 0x4e, 0x55, 0x4d, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45,
 	0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10, 0x00, 0x12, 0x0c, 0x0a, 0x08, 0x45, 0x4e, 0x55, 0x4d,
 	0x5f, 0x4f, 0x4e, 0x45, 0x10, 0x01, 0x12, 0x0c, 0x0a, 0x08, 0x45, 0x4e, 0x55, 0x4d, 0x5f, 0x54,
-	0x57, 0x4f, 0x10, 0x02, 0x42, 0xf5, 0x01, 0x0a, 0x1d, 0x63, 0x6f, 0x6d, 0x2e, 0x65, 0x69, 0x6e,
+	0x57, 0x4f, 0x10, 0x02, 0x42, 0xfa, 0x01, 0x0a, 0x1d, 0x63, 0x6f, 0x6d, 0x2e, 0x65, 0x69, 0x6e,
 	0x72, 0x69, 0x64, 0x65, 0x2e, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2e, 0x73, 0x79, 0x6e,
 	0x74, 0x61, 0x78, 0x2e, 0x76, 0x31, 0x42, 0x0b, 0x53, 0x79, 0x6e, 0x74, 0x61, 0x78, 0x50, 0x72,
 	0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x40, 0x67, 0x6f, 0x2e, 0x65, 0x69, 0x6e, 0x72, 0x69, 0x64,
@@ -610,8 +610,8 @@ var file_einride_example_syntax_v1_syntax_proto_rawDesc = []byte{
 	0x45, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x5c, 0x53, 0x79, 0x6e, 0x74, 0x61, 0x78, 0x5c, 0x56,
 	0x31, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x1c,
 	0x45, 0x69, 0x6e, 0x72, 0x69, 0x64, 0x65, 0x3a, 0x3a, 0x45, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65,
-	0x3a, 0x3a, 0x53, 0x79, 0x6e, 0x74, 0x61, 0x78, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x33,
+	0x3a, 0x3a, 0x53, 0x79, 0x6e, 0x74, 0x61, 0x78, 0x3a, 0x3a, 0x56, 0x31, 0x92, 0x03, 0x02, 0x08,
+	0x02, 0x62, 0x08, 0x65, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x70, 0xe8, 0x07,
 }
 
 var (

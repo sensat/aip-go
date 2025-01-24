@@ -1,4 +1,4 @@
-syntax = "proto3";
+edition = "2023";
 
 package einride.example.freight.v1;
 
@@ -10,6 +10,8 @@ import "google/api/client.proto";
 import "google/api/field_behavior.proto";
 import "google/api/resource.proto";
 import "google/protobuf/field_mask.proto";
+
+option features.field_presence = IMPLICIT;
 
 // This API represents a simple freight service.
 //

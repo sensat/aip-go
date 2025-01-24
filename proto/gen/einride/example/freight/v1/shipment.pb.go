@@ -31,43 +31,43 @@ type Shipment struct {
 	unknownFields protoimpl.UnknownFields
 
 	// The resource name of the shipment.
-	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Name string `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
 	// The creation timestamp of the shipment.
-	CreateTime *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
+	CreateTime *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=create_time,json=createTime" json:"create_time,omitempty"`
 	// The last update timestamp of the shipment.
 	//
 	// Updated when create/update/delete operation is shipment.
-	UpdateTime *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=update_time,json=updateTime,proto3" json:"update_time,omitempty"`
+	UpdateTime *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=update_time,json=updateTime" json:"update_time,omitempty"`
 	// The deletion timestamp of the shipment.
-	DeleteTime *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=delete_time,json=deleteTime,proto3" json:"delete_time,omitempty"`
+	DeleteTime *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=delete_time,json=deleteTime" json:"delete_time,omitempty"`
 	// The resource name of the origin site of the shipment.
 	// Format: shippers/{shipper}/sites/{site}
-	OriginSite string `protobuf:"bytes,5,opt,name=origin_site,json=originSite,proto3" json:"origin_site,omitempty"`
+	OriginSite string `protobuf:"bytes,5,opt,name=origin_site,json=originSite" json:"origin_site,omitempty"`
 	// The resource name of the destination site of the shipment.
 	// Format: shippers/{shipper}/sites/{site}
-	DestinationSite string `protobuf:"bytes,6,opt,name=destination_site,json=destinationSite,proto3" json:"destination_site,omitempty"`
+	DestinationSite string `protobuf:"bytes,6,opt,name=destination_site,json=destinationSite" json:"destination_site,omitempty"`
 	// The earliest pickup time of the shipment at the origin site.
-	PickupEarliestTime *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=pickup_earliest_time,json=pickupEarliestTime,proto3" json:"pickup_earliest_time,omitempty"`
+	PickupEarliestTime *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=pickup_earliest_time,json=pickupEarliestTime" json:"pickup_earliest_time,omitempty"`
 	// The latest pickup time of the shipment at the origin site.
-	PickupLatestTime *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=pickup_latest_time,json=pickupLatestTime,proto3" json:"pickup_latest_time,omitempty"`
+	PickupLatestTime *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=pickup_latest_time,json=pickupLatestTime" json:"pickup_latest_time,omitempty"`
 	// The earliest delivery time of the shipment at the destination site.
-	DeliveryEarliestTime *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=delivery_earliest_time,json=deliveryEarliestTime,proto3" json:"delivery_earliest_time,omitempty"`
+	DeliveryEarliestTime *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=delivery_earliest_time,json=deliveryEarliestTime" json:"delivery_earliest_time,omitempty"`
 	// The latest delivery time of the shipment at the destination site.
-	DeliveryLatestTime *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=delivery_latest_time,json=deliveryLatestTime,proto3" json:"delivery_latest_time,omitempty"`
+	DeliveryLatestTime *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=delivery_latest_time,json=deliveryLatestTime" json:"delivery_latest_time,omitempty"`
 	// The line items of the shipment.
-	LineItems []*LineItem `protobuf:"bytes,11,rep,name=line_items,json=lineItems,proto3" json:"line_items,omitempty"`
+	LineItems []*LineItem `protobuf:"bytes,11,rep,name=line_items,json=lineItems" json:"line_items,omitempty"`
 	// Annotations of the shipment.
-	Annotations map[string]string `protobuf:"bytes,12,rep,name=annotations,proto3" json:"annotations,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	Annotations map[string]string `protobuf:"bytes,12,rep,name=annotations" json:"annotations,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Reference ID provided by external system.
-	ExternalReferenceId string `protobuf:"bytes,13,opt,name=external_reference_id,json=externalReferenceId,proto3" json:"external_reference_id,omitempty"`
+	ExternalReferenceId string `protobuf:"bytes,13,opt,name=external_reference_id,json=externalReferenceId" json:"external_reference_id,omitempty"`
 	// labels of the shipment.
-	ImmutablePrimitivesMap map[string]string `protobuf:"bytes,14,rep,name=immutable_primitives_map,json=immutablePrimitivesMap,proto3" json:"immutable_primitives_map,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	ImmutablePrimitivesMap map[string]string `protobuf:"bytes,14,rep,name=immutable_primitives_map,json=immutablePrimitivesMap" json:"immutable_primitives_map,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// map line items of the shipment.
-	LineItemsMap map[string]*LineItem `protobuf:"bytes,17,rep,name=line_items_map,json=lineItemsMap,proto3" json:"line_items_map,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	LineItemsMap map[string]*LineItem `protobuf:"bytes,17,rep,name=line_items_map,json=lineItemsMap" json:"line_items_map,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// map line items of the shipment.
-	ImmutableLineItemsMap map[string]*LineItem `protobuf:"bytes,15,rep,name=immutable_line_items_map,json=immutableLineItemsMap,proto3" json:"immutable_line_items_map,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	ImmutableLineItemsMap map[string]*LineItem `protobuf:"bytes,15,rep,name=immutable_line_items_map,json=immutableLineItemsMap" json:"immutable_line_items_map,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// The immutable line items of the shipment.
-	ImmutableLineItemList []*LineItem `protobuf:"bytes,16,rep,name=immutable_line_item_list,json=immutableLineItemList,proto3" json:"immutable_line_item_list,omitempty"`
+	ImmutableLineItemList []*LineItem `protobuf:"bytes,16,rep,name=immutable_line_item_list,json=immutableLineItemList" json:"immutable_line_item_list,omitempty"`
 }
 
 func (x *Shipment) Reset() {
@@ -228,15 +228,15 @@ type LineItem struct {
 	unknownFields protoimpl.UnknownFields
 
 	// The title of the line item.
-	Title string `protobuf:"bytes,1,opt,name=title,proto3" json:"title,omitempty"`
+	Title string `protobuf:"bytes,1,opt,name=title" json:"title,omitempty"`
 	// The quantity of the line item.
-	Quantity float32 `protobuf:"fixed32,2,opt,name=quantity,proto3" json:"quantity,omitempty"`
+	Quantity float32 `protobuf:"fixed32,2,opt,name=quantity" json:"quantity,omitempty"`
 	// The weight of the line item in kilograms.
-	WeightKg float32 `protobuf:"fixed32,3,opt,name=weight_kg,json=weightKg,proto3" json:"weight_kg,omitempty"`
+	WeightKg float32 `protobuf:"fixed32,3,opt,name=weight_kg,json=weightKg" json:"weight_kg,omitempty"`
 	// The volume of the line item in cubic meters.
-	VolumeM3 float32 `protobuf:"fixed32,4,opt,name=volume_m3,json=volumeM3,proto3" json:"volume_m3,omitempty"`
+	VolumeM3 float32 `protobuf:"fixed32,4,opt,name=volume_m3,json=volumeM3" json:"volume_m3,omitempty"`
 	// Reference ID provided by external system.
-	ExternalReferenceId string `protobuf:"bytes,5,opt,name=external_reference_id,json=externalReferenceId,proto3" json:"external_reference_id,omitempty"`
+	ExternalReferenceId string `protobuf:"bytes,5,opt,name=external_reference_id,json=externalReferenceId" json:"external_reference_id,omitempty"`
 }
 
 func (x *LineItem) Reset() {
@@ -447,7 +447,7 @@ var file_einride_example_freight_v1_shipment_proto_rawDesc = []byte{
 	0x6c, 0x5f, 0x72, 0x65, 0x66, 0x65, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x05,
 	0x20, 0x01, 0x28, 0x09, 0x42, 0x04, 0xe2, 0x41, 0x01, 0x05, 0x52, 0x13, 0x65, 0x78, 0x74, 0x65,
 	0x72, 0x6e, 0x61, 0x6c, 0x52, 0x65, 0x66, 0x65, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x49, 0x64, 0x42,
-	0xfe, 0x01, 0x0a, 0x1e, 0x63, 0x6f, 0x6d, 0x2e, 0x65, 0x69, 0x6e, 0x72, 0x69, 0x64, 0x65, 0x2e,
+	0x83, 0x02, 0x0a, 0x1e, 0x63, 0x6f, 0x6d, 0x2e, 0x65, 0x69, 0x6e, 0x72, 0x69, 0x64, 0x65, 0x2e,
 	0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2e, 0x66, 0x72, 0x65, 0x69, 0x67, 0x68, 0x74, 0x2e,
 	0x76, 0x31, 0x42, 0x0d, 0x53, 0x68, 0x69, 0x70, 0x6d, 0x65, 0x6e, 0x74, 0x50, 0x72, 0x6f, 0x74,
 	0x6f, 0x50, 0x01, 0x5a, 0x42, 0x67, 0x6f, 0x2e, 0x65, 0x69, 0x6e, 0x72, 0x69, 0x64, 0x65, 0x2e,
@@ -463,7 +463,8 @@ var file_einride_example_freight_v1_shipment_proto_rawDesc = []byte{
 	0x74, 0x5c, 0x56, 0x31, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61,
 	0xea, 0x02, 0x1d, 0x45, 0x69, 0x6e, 0x72, 0x69, 0x64, 0x65, 0x3a, 0x3a, 0x45, 0x78, 0x61, 0x6d,
 	0x70, 0x6c, 0x65, 0x3a, 0x3a, 0x46, 0x72, 0x65, 0x69, 0x67, 0x68, 0x74, 0x3a, 0x3a, 0x56, 0x31,
-	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x92, 0x03, 0x02, 0x08, 0x02, 0x62, 0x08, 0x65, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x70,
+	0xe8, 0x07,
 }
 
 var (

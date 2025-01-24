@@ -1,8 +1,10 @@
-syntax = "proto3";
+edition = "2023";
 
 package einride.example.syntax.v1;
 
 import "google/api/field_behavior.proto";
+
+option features.field_presence = IMPLICIT;
 
 message FieldBehaviorMessage {
   string field = 1;

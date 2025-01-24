@@ -40,7 +40,7 @@ func (Proto) ProtocGenGo(ctx context.Context) error {
 
 func (Proto) ProtocGenGoGRPC(ctx context.Context) error {
 	sg.Logger(ctx).Println("installing...")
-	_, err := sgtool.GoInstall(ctx, "google.golang.org/grpc/cmd/protoc-gen-go-grpc", "v1.2.0")
+	_, err := sgtool.GoInstall(ctx, "google.golang.org/grpc/cmd/protoc-gen-go-grpc", "v1.5.1")
 	return err
 }
 

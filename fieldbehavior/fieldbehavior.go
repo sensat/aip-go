@@ -89,7 +89,7 @@ func isPresent(v protoreflect.Value, f protoreflect.FieldDescriptor, populated b
 	if !v.IsValid() {
 		return false
 	}
-	if f.HasOptionalKeyword() && populated {
+	if (f.HasOptionalKeyword() || f.HasPresence()) && populated {
 		return true
 	}
 	if f.IsList() {

@@ -30,7 +30,7 @@ type GetShipperRequest struct {
 
 	// The resource name of the shipper to retrieve.
 	// Format: shippers/{shipper}
-	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Name string `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
 }
 
 func (x *GetShipperRequest) Reset() {
@@ -80,12 +80,12 @@ type ListShippersRequest struct {
 
 	// Requested page size. Server may return fewer shippers than requested.
 	// If unspecified, server will pick an appropriate default.
-	PageSize int32 `protobuf:"varint,1,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	PageSize int32 `protobuf:"varint,1,opt,name=page_size,json=pageSize" json:"page_size,omitempty"`
 	// A token identifying a page of results the server should return.
 	// Typically, this is the value of
 	// [ListShippersResponse.next_page_token][einride.example.freight.v1.ListShippersResponse.next_page_token]
 	// returned from the previous call to `ListShippers` method.
-	PageToken string `protobuf:"bytes,2,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	PageToken string `protobuf:"bytes,2,opt,name=page_token,json=pageToken" json:"page_token,omitempty"`
 }
 
 func (x *ListShippersRequest) Reset() {
@@ -141,12 +141,12 @@ type ListShippersResponse struct {
 	unknownFields protoimpl.UnknownFields
 
 	// The list of shippers.
-	Shippers []*Shipper `protobuf:"bytes,1,rep,name=shippers,proto3" json:"shippers,omitempty"`
+	Shippers []*Shipper `protobuf:"bytes,1,rep,name=shippers" json:"shippers,omitempty"`
 	// A token to retrieve next page of results.  Pass this value in the
 	// [ListShippersRequest.page_token][einride.example.freight.v1.ListShippersRequest.page_token]
 	// field in the subsequent call to `ListShippers` method to retrieve the next
 	// page of results.
-	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken" json:"next_page_token,omitempty"`
 }
 
 func (x *ListShippersResponse) Reset() {
@@ -202,7 +202,7 @@ type CreateShipperRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	// The shipper to create.
-	Shipper *Shipper `protobuf:"bytes,1,opt,name=shipper,proto3" json:"shipper,omitempty"`
+	Shipper *Shipper `protobuf:"bytes,1,opt,name=shipper" json:"shipper,omitempty"`
 }
 
 func (x *CreateShipperRequest) Reset() {
@@ -253,9 +253,9 @@ type UpdateShipperRequest struct {
 	// The shipper to update with. The name must match or be empty.
 	// The shipper's `name` field is used to identify the shipper to be updated.
 	// Format: shippers/{shipper}
-	Shipper *Shipper `protobuf:"bytes,1,opt,name=shipper,proto3" json:"shipper,omitempty"`
+	Shipper *Shipper `protobuf:"bytes,1,opt,name=shipper" json:"shipper,omitempty"`
 	// The list of fields to be updated.
-	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
+	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask" json:"update_mask,omitempty"`
 }
 
 func (x *UpdateShipperRequest) Reset() {
@@ -312,7 +312,7 @@ type DeleteShipperRequest struct {
 
 	// The resource name of the shipper to delete.
 	// Format: shippers/{shipper}
-	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Name string `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
 }
 
 func (x *DeleteShipperRequest) Reset() {
@@ -362,7 +362,7 @@ type GetSiteRequest struct {
 
 	// The resource name of the site to retrieve.
 	// Format: shippers/{shipper}/sites/{site}
-	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Name string `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
 }
 
 func (x *GetSiteRequest) Reset() {
@@ -412,22 +412,22 @@ type ListSitesRequest struct {
 
 	// The resource name of the parent, which owns this collection of sites.
 	// Format: shippers/{shipper}
-	Parent string `protobuf:"bytes,1,opt,name=parent,proto3" json:"parent,omitempty"`
+	Parent string `protobuf:"bytes,1,opt,name=parent" json:"parent,omitempty"`
 	// Requested page size. Server may return fewer sites than requested.
 	// If unspecified, server will pick an appropriate default.
-	PageSize int32 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	PageSize int32 `protobuf:"varint,2,opt,name=page_size,json=pageSize" json:"page_size,omitempty"`
 	// A token identifying a page of results the server should return.
 	// Typically, this is the value of
 	// [ListSitesResponse.next_page_token][einride.example.freight.v1.ListSitesResponse.next_page_token]
 	// returned from the previous call to `ListSites` method.
-	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken" json:"page_token,omitempty"`
 	// Number of resource to skip in the request.
 	//   - A request with no page token and a skip value of 30 returns a single
 	//     page of results starting with the 31st result.
 	//   - A request with a page token corresponding to the 51st result (because the
 	//     first 50 results were returned on the first page) and a skip value of 30
 	//     returns a single page of results starting with the 81st result.
-	Skip int32 `protobuf:"varint,4,opt,name=skip,proto3" json:"skip,omitempty"`
+	Skip int32 `protobuf:"varint,4,opt,name=skip" json:"skip,omitempty"`
 }
 
 func (x *ListSitesRequest) Reset() {
@@ -497,12 +497,12 @@ type ListSitesResponse struct {
 	unknownFields protoimpl.UnknownFields
 
 	// The list of sites.
-	Sites []*Site `protobuf:"bytes,1,rep,name=sites,proto3" json:"sites,omitempty"`
+	Sites []*Site `protobuf:"bytes,1,rep,name=sites" json:"sites,omitempty"`
 	// A token to retrieve next page of results.  Pass this value in the
 	// [ListSitesRequest.page_token][einride.example.freight.v1.ListSitesRequest.page_token]
 	// field in the subsequent call to `ListSites` method to retrieve the next
 	// page of results.
-	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken" json:"next_page_token,omitempty"`
 }
 
 func (x *ListSitesResponse) Reset() {
@@ -559,9 +559,9 @@ type CreateSiteRequest struct {
 
 	// The resource name of the parent shipper for which this site will be created.
 	// Format: shippers/{shipper}
-	Parent string `protobuf:"bytes,1,opt,name=parent,proto3" json:"parent,omitempty"`
+	Parent string `protobuf:"bytes,1,opt,name=parent" json:"parent,omitempty"`
 	// The site to create.
-	Site *Site `protobuf:"bytes,2,opt,name=site,proto3" json:"site,omitempty"`
+	Site *Site `protobuf:"bytes,2,opt,name=site" json:"site,omitempty"`
 }
 
 func (x *CreateSiteRequest) Reset() {
@@ -619,9 +619,9 @@ type UpdateSiteRequest struct {
 	// The site to update with. The name must match or be empty.
 	// The site's `name` field is used to identify the site to be updated.
 	// Format: shippers/{shipper}/sites/{site}
-	Site *Site `protobuf:"bytes,1,opt,name=site,proto3" json:"site,omitempty"`
+	Site *Site `protobuf:"bytes,1,opt,name=site" json:"site,omitempty"`
 	// The list of fields to be updated.
-	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
+	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask" json:"update_mask,omitempty"`
 }
 
 func (x *UpdateSiteRequest) Reset() {
@@ -678,7 +678,7 @@ type DeleteSiteRequest struct {
 
 	// The resource name of the site to delete.
 	// Format: shippers/{shipper}/sites/{site}
-	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Name string `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
 }
 
 func (x *DeleteSiteRequest) Reset() {
@@ -730,11 +730,11 @@ type BatchGetSitesRequest struct {
 	// If this is set, the parent of all of the sites specified in `names`
 	// must match this field.
 	// Format: `shippers/{shipper}`
-	Parent string `protobuf:"bytes,1,opt,name=parent,proto3" json:"parent,omitempty"`
+	Parent string `protobuf:"bytes,1,opt,name=parent" json:"parent,omitempty"`
 	// The names of the sites to retrieve.
 	// A maximum of 1000 sites can be retrieved in a batch.
 	// Format: `shippers/{shipper}/sites/{site}`
-	Names []string `protobuf:"bytes,2,rep,name=names,proto3" json:"names,omitempty"`
+	Names []string `protobuf:"bytes,2,rep,name=names" json:"names,omitempty"`
 }
 
 func (x *BatchGetSitesRequest) Reset() {
@@ -790,7 +790,7 @@ type BatchGetSitesResponse struct {
 	unknownFields protoimpl.UnknownFields
 
 	// Sites requested.
-	Sites []*Site `protobuf:"bytes,1,rep,name=sites,proto3" json:"sites,omitempty"`
+	Sites []*Site `protobuf:"bytes,1,rep,name=sites" json:"sites,omitempty"`
 }
 
 func (x *BatchGetSitesResponse) Reset() {
@@ -840,7 +840,7 @@ type GetShipmentRequest struct {
 
 	// The resource name of the shipment to retrieve.
 	// Format: shippers/{shipper}/shipments/{shipment}
-	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Name string `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
 }
 
 func (x *GetShipmentRequest) Reset() {
@@ -890,15 +890,15 @@ type ListShipmentsRequest struct {
 
 	// The resource name of the parent, which owns this collection of shipments.
 	// Format: shippers/{shipper}
-	Parent string `protobuf:"bytes,1,opt,name=parent,proto3" json:"parent,omitempty"`
+	Parent string `protobuf:"bytes,1,opt,name=parent" json:"parent,omitempty"`
 	// Requested page size. Server may return fewer shipments than requested.
 	// If unspecified, server will pick an appropriate default.
-	PageSize int32 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	PageSize int32 `protobuf:"varint,2,opt,name=page_size,json=pageSize" json:"page_size,omitempty"`
 	// A token identifying a page of results the server should return.
 	// Typically, this is the value of
 	// [ListShipmentsResponse.next_page_token][einride.example.freight.v1.ListShipmentsResponse.next_page_token]
 	// returned from the previous call to `ListShipments` method.
-	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken" json:"page_token,omitempty"`
 }
 
 func (x *ListShipmentsRequest) Reset() {
@@ -961,12 +961,12 @@ type ListShipmentsResponse struct {
 	unknownFields protoimpl.UnknownFields
 
 	// The list of shipments.
-	Shipments []*Shipment `protobuf:"bytes,1,rep,name=shipments,proto3" json:"shipments,omitempty"`
+	Shipments []*Shipment `protobuf:"bytes,1,rep,name=shipments" json:"shipments,omitempty"`
 	// A token to retrieve next page of results.  Pass this value in the
 	// [ListShipmentsRequest.page_token][einride.example.freight.v1.ListShipmentsRequest.page_token]
 	// field in the subsequent call to `ListShipments` method to retrieve the next
 	// page of results.
-	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken" json:"next_page_token,omitempty"`
 }
 
 func (x *ListShipmentsResponse) Reset() {
@@ -1023,9 +1023,9 @@ type CreateShipmentRequest struct {
 
 	// The resource name of the parent shipper for which this shipment will be created.
 	// Format: shippers/{shipper}
-	Parent string `protobuf:"bytes,1,opt,name=parent,proto3" json:"parent,omitempty"`
+	Parent string `protobuf:"bytes,1,opt,name=parent" json:"parent,omitempty"`
 	// The shipment to create.
-	Shipment *Shipment `protobuf:"bytes,2,opt,name=shipment,proto3" json:"shipment,omitempty"`
+	Shipment *Shipment `protobuf:"bytes,2,opt,name=shipment" json:"shipment,omitempty"`
 }
 
 func (x *CreateShipmentRequest) Reset() {
@@ -1083,9 +1083,9 @@ type UpdateShipmentRequest struct {
 	// The shipment to update with. The name must match or be empty.
 	// The shipment's `name` field is used to identify the shipment to be updated.
 	// Format: shippers/{shipper}/shipments/{shipment}
-	Shipment *Shipment `protobuf:"bytes,1,opt,name=shipment,proto3" json:"shipment,omitempty"`
+	Shipment *Shipment `protobuf:"bytes,1,opt,name=shipment" json:"shipment,omitempty"`
 	// The list of fields to be updated.
-	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
+	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask" json:"update_mask,omitempty"`
 }
 
 func (x *UpdateShipmentRequest) Reset() {
@@ -1142,7 +1142,7 @@ type DeleteShipmentRequest struct {
 
 	// The resource name of the shipment to delete.
 	// Format: shippers/{shipper}/shipments/{shipment}
-	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Name string `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
 }
 
 func (x *DeleteShipmentRequest) Reset() {
@@ -1521,7 +1521,7 @@ var file_einride_example_freight_v1_freight_service_proto_rawDesc = []byte{
 	0x72, 0x73, 0x2f, 0x2a, 0x2f, 0x73, 0x68, 0x69, 0x70, 0x6d, 0x65, 0x6e, 0x74, 0x73, 0x2f, 0x2a,
 	0x7d, 0x1a, 0x1f, 0xca, 0x41, 0x1c, 0x66, 0x72, 0x65, 0x69, 0x67, 0x68, 0x74, 0x2d, 0x65, 0x78,
 	0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2e, 0x65, 0x69, 0x6e, 0x72, 0x69, 0x64, 0x65, 0x2e, 0x74, 0x65,
-	0x63, 0x68, 0x42, 0x84, 0x02, 0x0a, 0x1e, 0x63, 0x6f, 0x6d, 0x2e, 0x65, 0x69, 0x6e, 0x72, 0x69,
+	0x63, 0x68, 0x42, 0x89, 0x02, 0x0a, 0x1e, 0x63, 0x6f, 0x6d, 0x2e, 0x65, 0x69, 0x6e, 0x72, 0x69,
 	0x64, 0x65, 0x2e, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2e, 0x66, 0x72, 0x65, 0x69, 0x67,
 	0x68, 0x74, 0x2e, 0x76, 0x31, 0x42, 0x13, 0x46, 0x72, 0x65, 0x69, 0x67, 0x68, 0x74, 0x53, 0x65,
 	0x72, 0x76, 0x69, 0x63, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x42, 0x67, 0x6f,
@@ -1537,8 +1537,8 @@ var file_einride_example_freight_v1_freight_service_proto_rawDesc = []byte{
 	0x6c, 0x65, 0x5c, 0x46, 0x72, 0x65, 0x69, 0x67, 0x68, 0x74, 0x5c, 0x56, 0x31, 0x5c, 0x47, 0x50,
 	0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x1d, 0x45, 0x69, 0x6e, 0x72,
 	0x69, 0x64, 0x65, 0x3a, 0x3a, 0x45, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x3a, 0x3a, 0x46, 0x72,
-	0x65, 0x69, 0x67, 0x68, 0x74, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x33,
+	0x65, 0x69, 0x67, 0x68, 0x74, 0x3a, 0x3a, 0x56, 0x31, 0x92, 0x03, 0x02, 0x08, 0x02, 0x62, 0x08,
+	0x65, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x70, 0xe8, 0x07,
 }
 
 var (

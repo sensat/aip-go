@@ -1,6 +1,8 @@
-syntax = "proto3";
+edition = "2023";
 
 package einride.example.syntax.v1;
+
+option features.field_presence = IMPLICIT;
 
 message Message {
   double double = 1;

@@ -14,6 +14,7 @@ import (
 	"gotest.tools/v3/assert/cmp"
 )
 
+
 func TestClearFields(t *testing.T) {
 	t.Parallel()
 	t.Run("clear fields with set field_behavior", func(t *testing.T) {
@@ -341,6 +342,17 @@ func TestValidateRequiredFieldsWithMask(t *testing.T) {
 			t,
 			ValidateRequiredFieldsWithMask(
 				&examplefreightv1.Site{PersonnelCount: &zero},
+				&fieldmaskpb.FieldMask{Paths: []string{"personnel_count"}},
+			),
+		)
+	})
+	t.Run("ok - optional primitive annotated with REQUIRED set to non-default value", func(t *testing.T) {
+		t.Parallel()
+		one := int64(1)
+		assert.NilError(
+			t,
+			ValidateRequiredFieldsWithMask(
+				&examplefreightv1.Site{PersonnelCount: &one},
 				&fieldmaskpb.FieldMask{Paths: []string{"personnel_count"}},
 			),
 		)
