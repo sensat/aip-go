@@ -307,6 +307,28 @@ func TestLexer(t *testing.T) {
 		},
 
 		{
+			filter: `foo = null`,
+			expected: []Token{
+				{Position: Position{Offset: 0, Column: 1, Line: 1}, Type: TokenTypeText, Value: "foo"},
+				{Position: Position{Offset: 3, Column: 4, Line: 1}, Type: TokenTypeWhitespace, Value: " "},
+				{Position: Position{Offset: 4, Column: 5, Line: 1}, Type: TokenTypeEquals, Value: "="},
+				{Position: Position{Offset: 5, Column: 6, Line: 1}, Type: TokenTypeWhitespace, Value: " "},
+				{Position: Position{Offset: 6, Column: 7, Line: 1}, Type: TokenTypeNull, Value: "null"},
+			},
+		},
+
+		{
+			filter: `foo = NULL`,
+			expected: []Token{
+				{Position: Position{Offset: 0, Column: 1, Line: 1}, Type: TokenTypeText, Value: "foo"},
+				{Position: Position{Offset: 3, Column: 4, Line: 1}, Type: TokenTypeWhitespace, Value: " "},
+				{Position: Position{Offset: 4, Column: 5, Line: 1}, Type: TokenTypeEquals, Value: "="},
+				{Position: Position{Offset: 5, Column: 6, Line: 1}, Type: TokenTypeWhitespace, Value: " "},
+				{Position: Position{Offset: 6, Column: 7, Line: 1}, Type: TokenTypeNull, Value: "NULL"},
+			},
+		},
+
+		{
 			filter:        `a = "foo`,
 			errorContains: "unterminated string",
 		},

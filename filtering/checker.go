@@ -57,6 +57,8 @@ func (c *Checker) checkExpr(e *expr.Expr) error {
 			return c.checkInt64Literal(e)
 		case *expr.Constant_StringValue:
 			return c.checkStringLiteral(e)
+		case *expr.Constant_NullValue:
+			return c.checkNullLiteral(e)
 		default:
 			return c.errorf(e, "unsupported constant kind")
 		}
@@ -155,7 +157,8 @@ func (c *Checker) resolveCallExprFunctionOverload(
 				if !ok {
 					return nil, c.errorf(callExpr.GetArgs()[i], "unknown type")
 				}
-				if !proto.Equal(argType, param) {
+				// if the argument is a null literal, it can be of any type.
+				if !(proto.Equal(argType, param) || proto.Equal(argType, TypeNull)) {
 					allTypesMatch = false
 					break
 				}
@@ -217,6 +220,10 @@ func (c *Checker) checkInt64Literal(e *expr.Expr) error {
 
 func (c *Checker) checkStringLiteral(e *expr.Expr) error {
 	return c.setType(e, TypeString)
+}
+
+func (c *Checker) checkNullLiteral(e *expr.Expr) error {
+	return c.setType(e, TypeNull)
 }
 
 func (c *Checker) checkDoubleLiteral(e *expr.Expr) error {

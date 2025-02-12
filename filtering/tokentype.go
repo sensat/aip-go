@@ -10,6 +10,7 @@ const (
 	TokenTypeWhitespace TokenType = "WS"
 	TokenTypeText       TokenType = "TEXT"
 	TokenTypeString     TokenType = "STRING"
+	TokenTypeNull       TokenType = "NULL"
 )
 
 // Keyword token types.
@@ -52,7 +53,7 @@ func (t TokenType) Function() string {
 // IsField returns true if the token is a valid value.
 func (t TokenType) IsValue() bool {
 	switch t {
-	case TokenTypeText, TokenTypeString:
+	case TokenTypeText, TokenTypeString, TokenTypeNull:
 		return true
 	default:
 		return false

@@ -326,6 +326,10 @@ func (p *Parser) ParseMember() (_ *expr.Expr, err error) {
 		return nil, err
 	}
 	if !p.sniffTokens(TokenTypeDot) {
+		if valueToken.Type == TokenTypeNull {
+			return parsedNull(p.nextID(valueToken.Position)), nil
+		}
+
 		if valueToken.Type == TokenTypeString {
 			return parsedString(p.nextID(valueToken.Position), valueToken.Unquote()), nil
 		}

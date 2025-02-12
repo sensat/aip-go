@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"strings"
 	"unicode"
 	"unicode/utf8"
 )
@@ -70,6 +71,11 @@ func (l *Lexer) Lex() (Token, error) {
 			_, _ = l.nextRune()
 		}
 		return l.emit(TokenTypeNumber)
+	case 'n', 'N':
+		if l.sniffRunes("ull", true) {
+			l.nextRunes(3)
+			return l.emit(TokenTypeNull)
+		}
 	}
 	// Space?
 	if unicode.IsSpace(r) {
@@ -118,6 +124,11 @@ func (l *Lexer) remainingFilter() string {
 	return l.filter[l.tokenEnd.Offset:]
 }
 
+func (l *Lexer) remainingFilterToLength(length int32) string {
+	length = min(length, int32(len(l.remainingFilter())))
+	return l.filter[l.tokenEnd.Offset : l.tokenEnd.Offset+length]
+}
+
 func (l *Lexer) nextRune() (rune, error) {
 	r, n := utf8.DecodeRuneInString(l.remainingFilter())
 	switch {
@@ -137,6 +148,12 @@ func (l *Lexer) nextRune() (rune, error) {
 	return r, nil
 }
 
+func (l *Lexer) nextRunes(n int) {
+	for i := 0; i < n; i++ {
+		_, _ = l.nextRune()
+	}
+}
+
 func (l *Lexer) sniff(wantFns ...func(rune) bool) bool {
 	remaining := l.remainingFilter()
 	for _, wantFn := range wantFns {
@@ -152,6 +169,27 @@ func (l *Lexer) sniff(wantFns ...func(rune) bool) bool {
 func (l *Lexer) sniffRune(want rune) bool {
 	r, _ := utf8.DecodeRuneInString(l.remainingFilter())
 	return r == want
+}
+
+func (l *Lexer) sniffRunes(want string, caseInsensitive bool) bool {
+	remaining := l.remainingFilterToLength(int32(len(want)))
+	if caseInsensitive {
+		remaining = strings.ToLower(remaining)
+		want = strings.ToLower(want)
+	}
+
+	if len(remaining) < len(want) {
+		return false
+	}
+
+	for i, wantRune := range want {
+		r, _ := utf8.DecodeRuneInString(remaining[i : i+1])
+		if r != wantRune {
+			return false
+		}
+	}
+
+	return true
 }
 
 func (l *Lexer) errorf(format string, args ...interface{}) error {

@@ -26,6 +26,12 @@ func parsedString(id int64, s string) *expr.Expr {
 	return result
 }
 
+func parsedNull(id int64) *expr.Expr {
+	result := Null()
+	result.Id = id
+	return result
+}
+
 func parsedExpression(id int64, sequences ...*expr.Expr) *expr.Expr {
 	result := Expression(sequences...)
 	result.Id = id

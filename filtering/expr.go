@@ -4,6 +4,7 @@ import (
 	"time"
 
 	expr "google.golang.org/genproto/googleapis/api/expr/v1alpha1"
+	"google.golang.org/protobuf/types/known/structpb"
 )
 
 func Not(arg *expr.Expr) *expr.Expr {
@@ -130,6 +131,18 @@ func String(s string) *expr.Expr {
 			ConstExpr: &expr.Constant{
 				ConstantKind: &expr.Constant_StringValue{
 					StringValue: s,
+				},
+			},
+		},
+	}
+}
+
+func Null() *expr.Expr {
+	return &expr.Expr{
+		ExprKind: &expr.Expr_ConstExpr{
+			ConstExpr: &expr.Constant{
+				ConstantKind: &expr.Constant_NullValue{
+					NullValue: structpb.NullValue_NULL_VALUE,
 				},
 			},
 		},

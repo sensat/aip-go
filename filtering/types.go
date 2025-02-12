@@ -3,6 +3,7 @@ package filtering
 import (
 	expr "google.golang.org/genproto/googleapis/api/expr/v1alpha1"
 	"google.golang.org/protobuf/reflect/protoreflect"
+	"google.golang.org/protobuf/types/known/structpb"
 )
 
 // Primitive types.
@@ -53,4 +54,5 @@ func TypeEnum(enumType protoreflect.EnumType) *expr.Type {
 var (
 	TypeDuration  = &expr.Type{TypeKind: &expr.Type_WellKnown{WellKnown: expr.Type_DURATION}}
 	TypeTimestamp = &expr.Type{TypeKind: &expr.Type_WellKnown{WellKnown: expr.Type_TIMESTAMP}}
+	TypeNull      = &expr.Type{TypeKind: &expr.Type_Null{Null: structpb.NullValue(structpb.NullValue_NULL_VALUE)}}
 )

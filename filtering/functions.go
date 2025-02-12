@@ -221,6 +221,11 @@ const (
 	FunctionOverloadEqualsTimestamp       = FunctionEquals + "_timestamp"
 	FunctionOverloadEqualsTimestampString = FunctionEquals + "_timestamp_string"
 	FunctionOverloadEqualsDuration        = FunctionEquals + "_duration"
+	FunctionOverloadEqualsStringNull      = FunctionEquals + "_string_null"
+	FunctionOverloadEqualsIntNull      	  = FunctionEquals + "_int_null"
+	FunctionOverloadEqualsFloatNull       = FunctionEquals + "_float_null"
+	FunctionOverloadEqualsTimestampNull   = FunctionEquals + "_timestamp_null"
+	FunctionOverloadEqualsDurationNull    = FunctionEquals + "_duration_null"
 )
 
 // StandardFunctionEquals returns a declaration for the standard '=' function and all its standard overloads.
@@ -234,6 +239,11 @@ func StandardFunctionEquals() *expr.Decl {
 		NewFunctionOverload(FunctionOverloadEqualsTimestamp, TypeBool, TypeTimestamp, TypeTimestamp),
 		NewFunctionOverload(FunctionOverloadEqualsTimestampString, TypeBool, TypeTimestamp, TypeString),
 		NewFunctionOverload(FunctionOverloadEqualsDuration, TypeBool, TypeDuration, TypeDuration),
+		NewFunctionOverload(FunctionOverloadEqualsStringNull, TypeBool, TypeString, TypeNull),
+		NewFunctionOverload(FunctionOverloadEqualsIntNull, TypeBool, TypeInt, TypeNull),
+		NewFunctionOverload(FunctionOverloadEqualsFloatNull, TypeBool, TypeFloat, TypeNull),
+		NewFunctionOverload(FunctionOverloadEqualsTimestampNull, TypeBool, TypeTimestamp, TypeNull),
+		NewFunctionOverload(FunctionOverloadEqualsDurationNull, TypeBool, TypeDuration, TypeNull),
 	)
 }
 

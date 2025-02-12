@@ -431,6 +431,47 @@ func TestChecker(t *testing.T) {
 			filter:        "invalid = foo\xa0\x01bar",
 			errorContains: "invalid UTF-8",
 		},
+
+		{
+			filter: `annotations = null`,
+			declarations: []DeclarationOption{
+				DeclareStandardFunctions(),
+				DeclareIdent("annotations", TypeString),
+			},
+		},
+
+		{
+			filter: `annotations = null`,
+			declarations: []DeclarationOption{
+				DeclareStandardFunctions(),
+				DeclareIdent("annotations", TypeInt),
+			},
+		},
+
+		{
+			filter: `annotations = null`,
+			declarations: []DeclarationOption{
+				DeclareStandardFunctions(),
+				DeclareIdent("annotations", TypeFloat),
+			},
+		},
+
+		{
+			filter: `annotations = null`,
+			declarations: []DeclarationOption{
+				DeclareStandardFunctions(),
+				DeclareIdent("annotations", TypeTimestamp),
+			},
+		},
+
+		{
+			filter: `annotations = null`,
+			declarations: []DeclarationOption{
+				DeclareStandardFunctions(),
+				DeclareIdent("annotations", TypeDuration),
+			},
+		},
+
 	} {
 		tt := tt
 		t.Run(tt.filter, func(t *testing.T) {

@@ -188,7 +188,7 @@ func TestParser(t *testing.T) {
 
 		{
 			filter: `
-				start_time > timestamp("2006-01-02T15:04:05+07:00") AND 
+				start_time > timestamp("2006-01-02T15:04:05+07:00") AND
 				(driver = "driver1" OR start_driver = "driver1" OR end_driver = "driver1")
 			`,
 			expected: And(
@@ -212,6 +212,11 @@ func TestParser(t *testing.T) {
 		{
 			filter:   `annotations:schedule`,
 			expected: Has(Text("annotations"), String("schedule")),
+		},
+
+		{
+			filter:   `scene = null`,
+			expected: Equals(Text("scene"), Null()),
 		},
 
 		{
