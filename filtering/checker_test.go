@@ -472,6 +472,45 @@ func TestChecker(t *testing.T) {
 			},
 		},
 
+		{
+			filter: `annotations != NULL`,
+			declarations: []DeclarationOption{
+				DeclareStandardFunctions(),
+				DeclareIdent("annotations", TypeString),
+			},
+		},
+
+		{
+			filter: `annotations != NULL`,
+			declarations: []DeclarationOption{
+				DeclareStandardFunctions(),
+				DeclareIdent("annotations", TypeInt),
+			},
+		},
+
+		{
+			filter: `annotations != NULL`,
+			declarations: []DeclarationOption{
+				DeclareStandardFunctions(),
+				DeclareIdent("annotations", TypeFloat),
+			},
+		},
+
+		{
+			filter: `annotations != NULL`,
+			declarations: []DeclarationOption{
+				DeclareStandardFunctions(),
+				DeclareIdent("annotations", TypeTimestamp),
+			},
+		},
+
+		{
+			filter: `annotations != NULL`,
+			declarations: []DeclarationOption{
+				DeclareStandardFunctions(),
+				DeclareIdent("annotations", TypeDuration),
+			},
+		},
 	} {
 		tt := tt
 		t.Run(tt.filter, func(t *testing.T) {

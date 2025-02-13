@@ -256,6 +256,11 @@ const (
 	FunctionOverloadNotEqualsTimestamp       = FunctionNotEquals + "_timestamp"
 	FunctionOverloadNotEqualsTimestampString = FunctionNotEquals + "_timestamp_string"
 	FunctionOverloadNotEqualsDuration        = FunctionNotEquals + "_duration"
+	FunctionOverloadNotEqualsStringNull      = FunctionNotEquals + "_string_null"
+	FunctionOverloadNotEqualsIntNull      	  = FunctionNotEquals + "_int_null"
+	FunctionOverloadNotEqualsFloatNull       = FunctionNotEquals + "_float_null"
+	FunctionOverloadNotEqualsTimestampNull   = FunctionNotEquals + "_timestamp_null"
+	FunctionOverloadNotEqualsDurationNull    = FunctionNotEquals + "_duration_null"
 )
 
 // StandardFunctionNotEquals returns a declaration for the standard '!=' function and all its standard overloads.
@@ -269,5 +274,10 @@ func StandardFunctionNotEquals() *expr.Decl {
 		NewFunctionOverload(FunctionOverloadNotEqualsTimestamp, TypeBool, TypeTimestamp, TypeTimestamp),
 		NewFunctionOverload(FunctionOverloadNotEqualsTimestampString, TypeBool, TypeTimestamp, TypeString),
 		NewFunctionOverload(FunctionOverloadNotEqualsDuration, TypeBool, TypeDuration, TypeDuration),
+		NewFunctionOverload(FunctionOverloadNotEqualsStringNull, TypeBool, TypeString, TypeNull),
+		NewFunctionOverload(FunctionOverloadNotEqualsIntNull, TypeBool, TypeInt, TypeNull),
+		NewFunctionOverload(FunctionOverloadNotEqualsFloatNull, TypeBool, TypeFloat, TypeNull),
+		NewFunctionOverload(FunctionOverloadNotEqualsTimestampNull, TypeBool, TypeTimestamp, TypeNull),
+		NewFunctionOverload(FunctionOverloadNotEqualsDurationNull, TypeBool, TypeDuration, TypeNull),
 	)
 }
