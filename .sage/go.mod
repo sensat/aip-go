@@ -1,5 +1,7 @@
 module sage
 
-go 1.19
+go 1.22
 
-require go.einride.tech/sage v0.334.0
+toolchain go1.24.1
+
+require go.einride.tech/sage v0.370.0

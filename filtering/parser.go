@@ -331,17 +331,29 @@ func (p *Parser) ParseMember() (_ *expr.Expr, err error) {
 		}
 
 		if valueToken.Type == TokenTypeString {
-			return parsedString(p.nextID(valueToken.Position), valueToken.Unquote()), nil
+			unquoted, err := valueToken.Unquote()
+			if err != nil {
+				return nil, err
+			}
+			return parsedString(p.nextID(valueToken.Position), unquoted), nil
 		}
 		return parsedText(p.nextID(valueToken.Position), valueToken.Value), nil
 	}
-	value := parsedText(p.nextID(valueToken.Position), valueToken.Unquote())
+	unquoted, err := valueToken.Unquote()
+	if err != nil {
+		return nil, err
+	}
+	value := parsedText(p.nextID(valueToken.Position), unquoted)
 	_ = p.eatTokens(TokenTypeDot)
 	firstFieldToken, err := p.parseToken(TokenType.IsField)
 	if err != nil {
 		return nil, err
 	}
-	member := parsedMember(p.nextID(start), value, firstFieldToken.Unquote())
+	unquoted, err = firstFieldToken.Unquote()
+	if err != nil {
+		return nil, err
+	}
+	member := parsedMember(p.nextID(start), value, unquoted)
 	for {
 		if err := p.eatTokens(TokenTypeDot); err != nil {
 			break
@@ -350,7 +362,11 @@ func (p *Parser) ParseMember() (_ *expr.Expr, err error) {
 		if err != nil {
 			return nil, err
 		}
-		member = parsedMember(p.nextID(start), member, fieldToken.Unquote())
+		unquoted, err := fieldToken.Unquote()
+		if err != nil {
+			return nil, err
+		}
+		member = parsedMember(p.nextID(start), member, unquoted)
 	}
 	return member, nil
 }
@@ -380,7 +396,11 @@ func (p *Parser) ParseFunction() (_ *expr.Expr, err error) {
 		if err != nil {
 			return nil, err
 		}
-		_, _ = name.WriteString(nameToken.Unquote())
+		unquoted, err := nameToken.Unquote()
+		if err != nil {
+			return nil, err
+		}
+		_, _ = name.WriteString(unquoted)
 		if err := p.eatTokens(TokenTypeDot); err != nil {
 			break
 		}

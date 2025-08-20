@@ -512,7 +512,6 @@ func TestChecker(t *testing.T) {
 			},
 		},
 	} {
-		tt := tt
 		t.Run(tt.filter, func(t *testing.T) {
 			t.Parallel()
 			var parser Parser

@@ -45,6 +45,8 @@ func (l *Lexer) Lex() (Token, error) {
 		return l.emit(TokenType(l.tokenValue()))
 	// String?
 	case '\'', '"':
+		quote := r
+		escaped := false
 		for {
 			r2, err := l.nextRune()
 			if err != nil {
@@ -53,9 +55,14 @@ func (l *Lexer) Lex() (Token, error) {
 				}
 				return Token{}, err
 			}
-			if r == r2 {
+			if r2 == '\\' && !escaped {
+				escaped = true
+				continue
+			}
+			if r2 == quote && !escaped {
 				return l.emit(TokenTypeString)
 			}
+			escaped = false
 		}
 	// Number?
 	case '0', '1', '2', '3', '4', '5', '6', '7', '8', '9':
@@ -134,7 +141,11 @@ func (l *Lexer) nextRune() (rune, error) {
 	switch {
 	case n == 0:
 		return r, io.EOF
-	case r == utf8.RuneError:
+	// If the input rune was the replacement character (`\uFFFD`) preserve it.
+	//
+	// If the input rune was invalid (and converted to replacement character)
+	// return an error.
+	case r == utf8.RuneError && (n != 3 || l.remainingFilter()[:3] != "\xef\xbf\xbd"):
 		return r, l.errorf("invalid UTF-8")
 	}
 	if r == '\n' {
